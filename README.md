@@ -39,11 +39,43 @@ class MyWorker
   include Sidekiq::Worker
   include Sidekiq::AWS::SQS::Worker
 
-  sqs_options queue_url: 'https://sqs.foo.amazonaws.com/123/bar', wait_time_seconds: 20, destroy_on_received: true
+  sqs_options queue_url: 'https://sqs.foo.amazonaws.com/123/bar',
+              wait_time_seconds: 20, # optional, default: 20
+              destroy_on_received: true, # optional, default: false
+              max_number_of_messages: 10, # optional, default: 10
+              client: Aws::SQS::Client.new # optional if global config is set to Sidekiq::AWS::SQS.config.sqs_client
 
   def perform(message)
-    puts "Received message: #{message}"
+    body = JSON.parse(message, object_class: OpenStruct).body
+
+    puts "Received message: #{JSON.parse(body)}"
   end
+end
+```
+
+### Configuration
+You can configure the global options for all sqs workers by creating an initializer file in `config/initializers/sidekiq_aws_sqs.rb` and setting the options as shown below.
+
+
+```ruby
+# config/initializers/sidekiq_aws_sqs.rb
+
+require 'sidekiq/aws/sqs'
+require 'aws-sdk-sqs'
+
+Sidekiq::AWS::SQS.configure do |config|
+  config.sqs_client = Aws::SQS::Client.new # global SQS client for all sqs workers
+
+  # you must set the your sqs workers here for registering them to sidekiq aws sqs
+  config.sqs_workers = [
+    MyWorker
+  ]
+
+  # global polling options for all sqs workers
+  config.wait_time_seconds = 20 # optional, default: 20
+  config.destroy_on_received = true # optional, default: false
+  config.max_number_of_messages = 10 # optional, default: 10
+  config.logger = Sidekiq.logger # optional, default: Sidekiq.logger
 end
 ```
 

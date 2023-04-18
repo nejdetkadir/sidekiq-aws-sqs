@@ -2,7 +2,7 @@
 
 require_relative 'lib/sidekiq/aws/sqs/version'
 
-# rubocop:disable Layout/LineLength
+# rubocop:disable Layout/LineLength, Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name = 'sidekiq-aws-sqs'
   spec.version = Sidekiq::AWS::SQS::VERSION
@@ -36,5 +36,11 @@ Gem::Specification.new do |spec|
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+
+  spec.add_dependency 'aws-sdk-sqs', '~> 1.53'
+  spec.add_dependency 'dry-configurable', '~> 1.0', '>= 1.0.1'
+  spec.add_dependency 'rails', '>= 6.0.0'
+  spec.add_dependency 'safe_poller', '~> 0.0.1'
+  spec.add_dependency 'sidekiq', '>= 7.0.0'
 end
-# rubocop:enable Layout/LineLength
+# rubocop:enable Layout/LineLength, Metrics/BlockLength
