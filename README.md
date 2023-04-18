@@ -1,3 +1,9 @@
+[![Gem Version](https://badge.fury.io/rb/sidekiq-aws-sqs.svg)](https://badge.fury.io/rb/sidekiq-aws-sqs)
+![test](https://github.com/nejdetkadir/sidekiq-aws-sqs/actions/workflows/test.yml/badge.svg?branch=main)
+![rubocop](https://github.com/nejdetkadir/sidekiq-aws-sqs/actions/workflows/rubocop.yml/badge.svg?branch=main)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+![Ruby Version](https://img.shields.io/badge/ruby_version->=_2.7.0-blue.svg)
+
 # Sidekiq::AWS::SQS
 
 `sidekiq-aws-sqs` is a Sidekiq extension that simplifies the integration of AWS SQS queues with Sidekiq workers, by abstracting away the details of polling, processing and error handling of SQS messages. It aims to provide a reliable and flexible way to consume messages from SQS, while allowing the user to customize the polling behavior and SQS client options as needed.
