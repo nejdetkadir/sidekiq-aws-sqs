@@ -3,7 +3,7 @@
 module Sidekiq
   module AWS
     module SQS
-      VERSION = '0.0.0'
+      VERSION = '0.0.1'
     end
   end
 end

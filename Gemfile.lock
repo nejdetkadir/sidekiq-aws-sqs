@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sidekiq-aws-sqs (0.0.0)
+    sidekiq-aws-sqs (0.0.1)
       aws-sdk-sqs (~> 1.53)
       dry-configurable (~> 1.0, >= 1.0.1)
       rails (>= 6.0.0)
