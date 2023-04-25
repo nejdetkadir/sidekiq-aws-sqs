@@ -36,32 +36,24 @@ module Sidekiq
         end
 
         def start_polling
-          validate_sqs_options!
-
           Sidekiq::AWS::SQS.logger.debug("Starting polling for #{self}")
 
           @poller&.start || poller
         end
 
         def stop_polling
-          validate_sqs_options!
-
           Sidekiq::AWS::SQS.logger.debug("Stopping polling for #{self}")
 
           @poller&.stop
         end
 
         def pause_polling
-          validate_sqs_options!
-
           Sidekiq::AWS::SQS.logger.debug("Pausing polling for #{self}")
 
           @poller&.pause
         end
 
         def resume_polling
-          validate_sqs_options!
-
           Sidekiq::AWS::SQS.logger.debug("Resuming polling for #{self}")
 
           @poller&.resume
