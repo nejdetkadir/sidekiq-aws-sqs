@@ -46,9 +46,9 @@ class MyWorker
               client: Aws::SQS::Client.new # optional if global config is set to Sidekiq::AWS::SQS.config.sqs_client
 
   def perform(message)
-    body = JSON.parse(message, object_class: OpenStruct).body
+    parsed_message = JSON.parse(message, symbolize_names: true)
 
-    puts "Received message: #{JSON.parse(body)}"
+    puts "Received message: #{parsed_message[:body]}"
   end
 end
 ```
